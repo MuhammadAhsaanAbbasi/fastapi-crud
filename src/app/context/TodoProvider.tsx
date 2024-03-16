@@ -8,8 +8,15 @@ export const TodoProvider = ({ children }: {
 }) => {
 	const [todo, setTodo] = useState<Todo[]>([]);
 
+	const addTodo = (todo: Todo) => {
+		setTodo((prev)=>[{id: todo.id, content:todo.content, status:todo.status}, ...prev])
+	}
+	
+	const deleteTodo = async (id: number) =>{
+		setTodo((prev) => prev.filter((todo) => todo.id !== id))
+	}
 	return (
-		<todoctx.Provider value={{ todo, setTodo }}>
+		<todoctx.Provider value={{ todo, setTodo, addTodo, deleteTodo }}>
 			{children}
 		</todoctx.Provider>
 	)

@@ -7,6 +7,8 @@ export const todoctx = createContext(
             content : "",
             status: false
         }],
-        setTodo: (todo: Todo[]) => { }
+        setTodo: (todo: Todo[]) => { },
+        addTodo: (todo: Todo) => { },
+        deleteTodo: (id: number) => { }
     }
 )
