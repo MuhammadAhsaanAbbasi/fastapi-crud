@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { Todo } from '@/components/interfaces'
-import useTodo from './context/TodoProvider'
+import useTodo from '@/components/context/TodoProvider'
 
 
 
