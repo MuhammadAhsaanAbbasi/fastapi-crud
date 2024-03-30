@@ -16,6 +16,7 @@ export interface User {
     username: string,
     updated_at: string,
     hashed_password: string,
+    imageUrl: string,
     email: string,
     is_active: boolean,
     is_verified: boolean,

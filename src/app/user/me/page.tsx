@@ -2,6 +2,7 @@ import { Button } from '@/components/ui/button';
 import { MailCheckIcon } from 'lucide-react';
 import { cookies } from 'next/headers'
 import { User } from '../../../../typings';
+import Image from 'next/image';
 
 const UserPage = async () => {
     const cookieStore = cookies().get('access_token');
@@ -20,7 +21,7 @@ const UserPage = async () => {
 
             <div className="max-w-2xl my-auto mx-auto p-6 bg-white rounded-lg shadow-md w-full">
                 <div className="flex justify-between items-center mb-4">
-                    {/* {cleanPictureURL && <Image src={cleanPictureURL} width={56} height={56} alt='pictureURL' className="flex items-center gap-2" />} */}
+                    {user.imageUrl && <Image src={user.imageUrl} width={56} height={56} alt='pictureURL' className="flex items-center gap-2" />}
                     <PanelTopCloseIcon className="w-6 h-10" />
                 </div>
                 <div className="border-b-2 border-blue-600 py-2 mb-4">
