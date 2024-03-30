@@ -20,27 +20,32 @@ const LoginForm = () => {
     const form = useForm<z.infer<typeof LoginSchema>>({
         resolver: zodResolver(LoginSchema),
         defaultValues:{
-            email:"",
+            username:"",
             password:""
         }
     })
     const router = useRouter()
     const onSubmit = async (values: z.infer<typeof LoginSchema>) => {
+        
         setError("")
         setSuccess("")
         try {
-            const data = await fetch("/api/auth/sign-in", {
+            const formData = new FormData();
+            formData.append("username", values.username);
+            formData.append("password", values.password);
+
+            const response = await fetch("http://localhost:8000/api/auth/login/", {
                 method: "POST",
-                body: JSON.stringify({
-                    email: values.email,
-                    password: values.password,
-                }),
                 headers: {
-                    "Content-Type": "application/json"
-                }
+                    "request-mode": "no cors",
+                    "content-type": "application/form-data"
+                },
+
+                body: formData,
             })
-            if(data.ok){
-                const res = await data.json()
+            if(response.ok){
+                const res = await response.json()
+                console.log(res)
                 if(res.error){
                     setError(res.error)
                 }
@@ -66,24 +71,23 @@ const LoginForm = () => {
             backButtonhref="/auth/register"
             showSocial
             >
-            <Form {...form}>
+            <Form  {...form}>
                 <form 
                 className='space-y-5'
                 onSubmit={form.handleSubmit((onSubmit))}>
                     <FormField
                     control={form.control}
-                    name='email'
+                    name='username'
                     render={({field})=>(
                         <FormItem>
                             <FormLabel>
-                                Email
+                                UserName
                             </FormLabel>
                             <FormControl>
                                 <Input
                                 {...field}
                                 disabled={isPending}
-                                placeholder='abc@example.com'
-                                type="email"
+                                placeholder='Ahsaan Abbasi'
                                 />
                             </FormControl>
                             <FormMessage/>
