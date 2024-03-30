@@ -10,3 +10,15 @@ export interface Tokens {
     refresh_token: string,
     token_type: string
 }
+
+export interface User {
+    id: number,
+    username: string,
+    updated_at: string,
+    hashed_password: string,
+    email: string,
+    is_active: boolean,
+    is_verified: boolean,
+    role: string,
+    created_at: string
+}
