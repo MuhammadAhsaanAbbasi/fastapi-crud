@@ -1,5 +1,5 @@
 import React from 'react'
-import TodoForm from '../TodoForm'
+import TodoForm from '../../components/TodoForm'
 
 const TodosPage = () => {
     return (

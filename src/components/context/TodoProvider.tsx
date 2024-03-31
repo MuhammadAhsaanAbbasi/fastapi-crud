@@ -1,7 +1,7 @@
 "use client"
+import { Todo } from "../../../typings";
 import { todoctx } from "./todoCtx";
 import { useState, useContext } from "react";
-import { Todo } from "@/components/interfaces";
 
 export const TodoProvider = ({ children }: {
 	children: React.ReactNode
@@ -9,7 +9,7 @@ export const TodoProvider = ({ children }: {
 	const [todo, setTodo] = useState<Todo[]>([]);
 
 	const addTodo = (todo: Todo) => {
-		setTodo((prev)=>[{id: todo.id, content:todo.content, status:todo.status}, ...prev])
+		setTodo((prev)=>[{id: todo.id, title:todo.title, status: todo.status}])
 	}
 	
 	const deleteTodo = async (id: number) =>{

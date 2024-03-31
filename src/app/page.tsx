@@ -1,5 +1,5 @@
 import Image from "next/image";
-import TodoForm from "./TodoForm";
+import TodoForm from "../components/TodoForm";
 import { ChromeIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";

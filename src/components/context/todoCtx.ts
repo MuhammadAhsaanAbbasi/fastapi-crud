@@ -1,10 +1,10 @@
 import { createContext } from "react";
-import { Todo } from "@/components/interfaces";
+import { Todo } from "../../../typings";
 export const todoctx = createContext(
     {
         todo: [{
             id: 0,
-            content : "",
+            title : "",
             status: false
         }],
         setTodo: (todo: Todo[]) => { },
