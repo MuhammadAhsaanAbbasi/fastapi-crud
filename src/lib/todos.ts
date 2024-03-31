@@ -34,3 +34,19 @@ export const getTodos = async () => {
     const data = await response.json();
     return data;
 }
+
+export const deleteTodos = async (todo_id: number) => {
+    const cookieStore = cookies().get('access_token');
+    const response = await fetch(`http://localhost:8000/api/auth/todo/${todo_id}`, {
+        method: "DELETE",
+        headers: {
+            "request-mode": "no cors",
+            "Authorization": `Bearer ${cookieStore?.value}`
+        }
+    })
+    if (!response.ok) {
+        throw new Error(`Failed to delete todo with ID ${todo_id}. Status: ${response.status}`);
+    }
+    const data = await response.json();
+    return data
+}

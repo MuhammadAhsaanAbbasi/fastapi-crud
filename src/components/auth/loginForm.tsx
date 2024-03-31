@@ -44,7 +44,7 @@ const LoginForm = () => {
             if (response.ok) {
                 const res: Tokens = await response.json()
                 console.log(res)
-                await setCookies({access_token: res.access_token, expires_in: res.expires_in, refresh_token: res.refresh_token, token_type: res.token_type})
+                await setCookies({access_token: res.access_token, access_expires_in: res.access_expires_in, refresh_token: res.refresh_token, token_type: res.token_type, refresh_token_expires_in: res.refresh_token_expires_in})
                 // if(res.error){
                 //     setError(res.error)
                 // }

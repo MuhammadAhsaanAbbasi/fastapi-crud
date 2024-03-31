@@ -6,7 +6,7 @@ import Image from 'next/image';
 
 const UserPage = async () => {
     const cookieStore = cookies().get('access_token');
-    console.log(cookieStore);
+    // console.log(cookieStore);
     const getUser = await fetch("http://localhost:8000/api/auth/user/me/", {
         method: "GET",
         headers: {

@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import useTodo from '@/components/context/TodoProvider'
 import { Todo } from '../../typings'
-import { getTodos } from '@/lib/todos'
+import { deleteTodos, getTodos } from '@/lib/todos'
 
 
 
@@ -9,35 +9,33 @@ const TodoItem = () => {
     const { todo, setTodo, deleteTodo } = useTodo()
 
     const deletedTodo = async (todo_id: number) => {
-        // console.log(todo_id);
-        // const response = await fetch(`http://localhost:8000/todos/${todo_id}`, {
-        //     method: "DELETE",
-        // })
-        // const data: Todo = await response.json();
-        // // console.log(data);
-        // deleteTodo(data.id)
+        console.log(todo_id);
+        const data = await deleteTodos(todo_id)
+        console.log(data);
+        deleteTodo(data.id)
     }
 
-    useEffect(()=>{
-        const fetchedData = async ()=>{
+    useEffect(() => {
+        const fetchedData = async () => {
             const response: Todo[] = await getTodos()
             setTodo(response)
         }
         fetchedData()
-    },[setTodo])
+    }, [setTodo])
     return (
         <div className=''>
-
-            {todo?.map((todo) => (
-                <div key={todo.id} className='flex items-center gap-2'>
+            {todo && Array.isArray(todo) && todo.length > 0 ? (
+            todo.map((todoItem) => (
+                <div key={todoItem.id} className='flex items-center gap-2'>
                     <h1>
-                        {todo.title.charAt(0).toUpperCase() + todo.title.slice(1).toLowerCase()}
+                        {todoItem.title.charAt(0).toUpperCase() + todoItem.title.slice(1).toLowerCase()}
                     </h1>
-
-                    <button onClick={() => deletedTodo(todo.id)}
-                    >❌</button>
+                    <button onClick={() => deletedTodo(todoItem.id)}>❌</button>
                 </div>
-            ))}
+            ))
+        ) : (
+            <p>No todos found</p>
+        )}
         </div>
     )
 }
