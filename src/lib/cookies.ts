@@ -1,5 +1,4 @@
 'use server'
-
 import { cookies } from 'next/headers'
 import { Tokens } from '../../typings'
 
@@ -25,7 +24,4 @@ export default async function setCookies({ access_token, access_expires_in, refr
     cookiesArray.forEach(cookie => {
         cookies().set(cookie.name, cookie.value, cookie.options)
     })
-    const cookieStore = cookies()
-    const theme = cookieStore.get('access_token')?.value
-    console.log(theme)
 }

@@ -31,13 +31,13 @@ const TodoForm = () => {
       const data = await formSubmit(values)
       if(data){
         addTodo(data)
-        router.refresh()
         console.log(data)
       }
     } catch (error) {
       console.log(error)
     }
     form.reset();
+    router.refresh()
   }
   return (
     <div className=''>
