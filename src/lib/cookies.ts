@@ -25,3 +25,9 @@ export default async function setCookies({ access_token, access_expires_in, refr
         cookies().set(cookie.name, cookie.value, cookie.options)
     })
 }
+
+
+export const deleteCookies = () => {
+    cookies().delete('access_token')
+    cookies().delete('refresh_token')
+}

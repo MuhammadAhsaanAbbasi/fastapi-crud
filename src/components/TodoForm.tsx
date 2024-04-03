@@ -12,7 +12,7 @@ import { TodoSchema } from '../../schemas'
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
 import { useRouter } from 'next/navigation'
-import { formSubmit } from '@/lib/todos'
+import { addTodos } from '@/lib/todos'
 
 
 const TodoForm = () => {
@@ -28,11 +28,16 @@ const TodoForm = () => {
 
   const onSubmit = async (values: z.infer<typeof TodoSchema>) => {
     try {
-      const data = await formSubmit(values)
+      const data = await addTodos(values);
       if(data){
         addTodo(data)
         console.log(data)
       }
+      else {
+        startTransition(() => {
+            router.refresh()
+        })
+    }
     } catch (error) {
       console.log(error)
     }

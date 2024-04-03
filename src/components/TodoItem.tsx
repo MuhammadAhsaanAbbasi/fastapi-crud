@@ -2,17 +2,28 @@ import React, { useEffect } from 'react'
 import useTodo from '@/components/context/TodoProvider'
 import { Todo } from '../../typings'
 import { deleteTodos, getTodos } from '@/lib/todos'
-
+import { useRouter } from "next/navigation"
+import { Button } from './ui/button'
+import { deleteCookies } from '@/lib/cookies'
 
 
 const TodoItem = () => {
     const { todo, setTodo, deleteTodo } = useTodo()
-
+    const router = useRouter()
     const deletedTodo = async (todo_id: number) => {
         console.log(todo_id);
         const data = await deleteTodos(todo_id)
-        console.log(data);
         deleteTodo(data.id)
+        router.refresh()
+    }
+
+    const deletedCookies = async () => {
+        try{
+            await deleteCookies();
+            router.refresh()
+        }catch(e){
+            console.log(e);
+        }
     }
 
     useEffect(() => {
@@ -36,6 +47,7 @@ const TodoItem = () => {
         ) : (
             <p>No todos found</p>
         )}
+        <Button onClick={()=>{deletedCookies()}}>Sign Out</Button>
         </div>
     )
 }
